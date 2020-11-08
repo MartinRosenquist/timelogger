@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Hosting;
 using Timelogger.Entities;
+using Timelogger.Repository;
 
 namespace Timelogger.Api
 {
@@ -72,7 +73,10 @@ namespace Timelogger.Api
 			var testProject1 = new Project
 			{
 				Id = 1,
-				Name = "e-conomic Interview"
+				Name = "e-conomic Interview",
+				Deadline = "09-11-2010",
+				Customer = new Customer { Id = 1, Name = "Calin", Company = "Visma" },
+				State = State.Started
 			};
 
 			context.Projects.Add(testProject1);

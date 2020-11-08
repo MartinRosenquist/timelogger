@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Timelogger.Repository;
 
 namespace Timelogger.Api.Controllers
 {
@@ -21,6 +22,7 @@ namespace Timelogger.Api.Controllers
 
 		// GET api/projects
 		[HttpGet]
+		[Route("get")]
 		public IActionResult Get()
 		{
 			return Ok(_context.Projects);
