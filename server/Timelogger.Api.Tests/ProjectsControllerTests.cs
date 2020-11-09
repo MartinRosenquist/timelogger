@@ -1,19 +1,33 @@
 using Timelogger.Api.Controllers;
 using NUnit.Framework;
+using Microsoft.AspNetCore.Mvc;
+using Moq;
 
 namespace Timelogger.Api.Tests
 {
     public class ProjectsControllerTests
     {
+        private Mock<IRepositoryWrapper> _mock;
+
+        [SetUp]
+        public void Setup()
+        {
+            _mock = new Mock<IRepositoryWrapper>();
+        }
 
         [Test]
-        public void HelloWorld_ShouldReply_HelloBack()
+        public void GetAll_ShouldReturn_OkStatusCode()
         {
-            ProjectsController sut = new ProjectsController(null);
+            // Arrange
+            _mock.Setup(repo => repo.Project.GetAll());
+            var controller = new ProjectsController(_mock.Object);
 
-            string actual = sut.HelloWorld();
+            // Act
+            var result = controller.GetAll();
 
-            Assert.AreEqual("Hello Back!", actual);
+            // Assert
+            int? statusCode = ((OkObjectResult)result).StatusCode;
+            Assert.AreEqual(404, statusCode);
         }
     }
 } 
